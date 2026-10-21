@@ -5,9 +5,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/splash_screen.dart';
+import 'services/mock_api_service.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Automatically start embedded Dummy REST API server for testing
+  await MockApiService.startServer();
 
   // Set system UI overlay style for seamless status bar integration
   SystemChrome.setSystemUIOverlayStyle(

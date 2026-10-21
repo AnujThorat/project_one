@@ -1,10 +1,13 @@
 // lib/repositories/timetable_repository.dart
-// Repository for class timetable schedules
+// Repository for class timetable schedules with REST API integration
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import '../models/timetable_model.dart';
+import '../services/api_constants.dart';
 
 class TimetableRepository {
-  static final Map<String, List<TimetableModel>> _scheduleByDay = {
+  static final Map<String, List<TimetableModel>> _fallbackScheduleByDay = {
     'Wed': [
       TimetableModel(
         id: 1,
@@ -14,7 +17,7 @@ class TimetableRepository {
         room: 'Room 101',
         faculty: 'Prof. Alan Turing',
         day: 'Wed',
-        colorValue: 0xFF7C4DFF, // Purple
+        colorValue: 0xFF7C4DFF,
       ),
       TimetableModel(
         id: 2,
@@ -24,7 +27,7 @@ class TimetableRepository {
         room: 'Room 204',
         faculty: 'Dr. Leonard Euler',
         day: 'Wed',
-        colorValue: 0xFF00B4D8, // Teal/Cyan
+        colorValue: 0xFF00B4D8,
       ),
       TimetableModel(
         id: 3,
@@ -34,7 +37,7 @@ class TimetableRepository {
         room: 'Lab 3',
         faculty: 'Prof. Tim Berners-Lee',
         day: 'Wed',
-        colorValue: 0xFFFF9800, // Amber/Orange
+        colorValue: 0xFFFF9800,
       ),
       TimetableModel(
         id: 4,
@@ -44,7 +47,7 @@ class TimetableRepository {
         room: 'Room 301',
         faculty: 'Dr. Maya Angelou',
         day: 'Wed',
-        colorValue: 0xFFE91E63, // Pink
+        colorValue: 0xFFE91E63,
       ),
       TimetableModel(
         id: 5,
@@ -54,7 +57,7 @@ class TimetableRepository {
         room: 'Room 102',
         faculty: 'Dr. Edgar Codd',
         day: 'Wed',
-        colorValue: 0xFF0288D1, // Blue
+        colorValue: 0xFF0288D1,
       ),
     ],
     'Mon': [
@@ -78,16 +81,6 @@ class TimetableRepository {
         day: 'Mon',
         colorValue: 0xFF7C4DFF,
       ),
-      TimetableModel(
-        id: 8,
-        subject: 'Operating Systems',
-        subjectCode: 'CS303',
-        timeSlot: '1:00 PM - 2:00 PM',
-        room: 'Room 201',
-        faculty: 'Dr. Linus Torvalds',
-        day: 'Mon',
-        colorValue: 0xFF00B4D8,
-      ),
     ],
     'Tue': [
       TimetableModel(
@@ -110,20 +103,10 @@ class TimetableRepository {
         day: 'Tue',
         colorValue: 0xFFFF9800,
       ),
-      TimetableModel(
-        id: 11,
-        subject: 'Web Development Lab',
-        subjectCode: 'CS305L',
-        timeSlot: '1:30 PM - 3:30 PM',
-        room: 'Lab 3',
-        faculty: 'Prof. Tim Berners-Lee',
-        day: 'Tue',
-        colorValue: 0xFFE91E63,
-      ),
     ],
     'Thu': [
       TimetableModel(
-        id: 12,
+        id: 11,
         subject: 'Computer Science',
         subjectCode: 'CS301',
         timeSlot: '9:00 AM - 10:00 AM',
@@ -133,17 +116,7 @@ class TimetableRepository {
         colorValue: 0xFF7C4DFF,
       ),
       TimetableModel(
-        id: 13,
-        subject: 'Operating Systems Lab',
-        subjectCode: 'CS303L',
-        timeSlot: '11:00 AM - 1:00 PM',
-        room: 'Lab 2',
-        faculty: 'Dr. Linus Torvalds',
-        day: 'Thu',
-        colorValue: 0xFF00B4D8,
-      ),
-      TimetableModel(
-        id: 14,
+        id: 12,
         subject: 'English Communication',
         subjectCode: 'HUM102',
         timeSlot: '2:15 PM - 3:15 PM',
@@ -155,7 +128,7 @@ class TimetableRepository {
     ],
     'Fri': [
       TimetableModel(
-        id: 15,
+        id: 13,
         subject: 'Mathematics',
         subjectCode: 'MATH201',
         timeSlot: '9:00 AM - 10:00 AM',
@@ -164,30 +137,10 @@ class TimetableRepository {
         day: 'Fri',
         colorValue: 0xFF00B4D8,
       ),
-      TimetableModel(
-        id: 16,
-        subject: 'Database Systems Lab',
-        subjectCode: 'CS304L',
-        timeSlot: '10:30 AM - 12:30 PM',
-        room: 'Lab 1',
-        faculty: 'Dr. Edgar Codd',
-        day: 'Fri',
-        colorValue: 0xFF0288D1,
-      ),
-      TimetableModel(
-        id: 17,
-        subject: 'Project Seminar',
-        subjectCode: 'CS399',
-        timeSlot: '2:00 PM - 4:00 PM',
-        room: 'Auditorium B',
-        faculty: 'Department Faculty',
-        day: 'Fri',
-        colorValue: 0xFFFF9800,
-      ),
     ],
     'Sat': [
       TimetableModel(
-        id: 18,
+        id: 15,
         subject: 'Club Activities & Mentorship',
         subjectCode: 'ACT101',
         timeSlot: '10:00 AM - 1:00 PM',
@@ -200,8 +153,21 @@ class TimetableRepository {
     'Sun': [],
   };
 
+  // Fetch timetable for a day from Dummy REST API via HTTP GET
   Future<List<TimetableModel>> fetchTimetable({String day = 'Wed'}) async {
-    await Future.delayed(const Duration(milliseconds: 250));
-    return _scheduleByDay[day] ?? _scheduleByDay['Wed'] ?? [];
+    try {
+      final response = await http
+          .get(Uri.parse('${ApiConstants.timetableEndpoint}?day=$day'))
+          .timeout(ApiConstants.requestTimeout);
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        return data.map((json) => TimetableModel.fromJson(json as Map<String, dynamic>)).toList();
+      }
+    } catch (_) {
+      // Fallback
+    }
+
+    return _fallbackScheduleByDay[day] ?? _fallbackScheduleByDay['Wed'] ?? [];
   }
 }

@@ -1,10 +1,13 @@
 // lib/repositories/event_repository.dart
-// Repository for campus events and student club activities
+// Repository for campus events and student clubs with REST API integration
 
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import '../models/event_model.dart';
+import '../services/api_constants.dart';
 
 class EventRepository {
-  static final List<EventModel> _events = [
+  static final List<EventModel> _fallbackEvents = [
     EventModel(
       id: 1,
       title: 'Cultural Fest 2025',
@@ -15,7 +18,7 @@ class EventRepository {
       description:
           'Join us for the premier annual cultural festival featuring dance, battle of bands, fashion runway, and food stalls.',
       organizer: 'Student Council',
-      colorValue: 0xFFE91E63, // Vibrant Pink/Rose
+      colorValue: 0xFFE91E63,
       isBookmarked: true,
     ),
     EventModel(
@@ -28,7 +31,7 @@ class EventRepository {
       description:
           '24-hour non-stop coding hackathon. Build innovative AI, Web3, and IoT solutions with exciting cash prizes.',
       organizer: 'Coding & Tech Club',
-      colorValue: 0xFF0288D1, // Tech Blue
+      colorValue: 0xFF0288D1,
       isBookmarked: false,
     ),
     EventModel(
@@ -41,7 +44,7 @@ class EventRepository {
       description:
           'Championship final clash between Riverside College and Metro University. Come cheer for your college team!',
       organizer: 'Sports Committee',
-      colorValue: 0xFF43A047, // Forest Green
+      colorValue: 0xFF43A047,
       isBookmarked: false,
     ),
     EventModel(
@@ -54,7 +57,7 @@ class EventRepository {
       description:
           'Hands-on workshop on autonomous mobile robotics, sensor integration, and Arduino microcontrollers.',
       organizer: 'Robotics Society',
-      colorValue: 0xFF8E24AA, // Purple
+      colorValue: 0xFF8E24AA,
       isBookmarked: true,
     ),
     EventModel(
@@ -72,22 +75,40 @@ class EventRepository {
     ),
   ];
 
-  // Fetch all events with optional simulated delay for FutureBuilder
+  // Fetch all events from Dummy REST API via HTTP GET
   Future<List<EventModel>> fetchEvents({String category = 'All'}) async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    if (category == 'All') {
-      return List<EventModel>.from(_events);
+    try {
+      final url = category == 'All'
+          ? ApiConstants.eventsEndpoint
+          : '${ApiConstants.eventsEndpoint}?category=${Uri.encodeComponent(category)}';
+
+      final response = await http
+          .get(Uri.parse(url))
+          .timeout(ApiConstants.requestTimeout);
+
+      if (response.statusCode == 200) {
+        final List<dynamic> data = jsonDecode(response.body);
+        return data.map((json) => EventModel.fromJson(json as Map<String, dynamic>)).toList();
+      }
+    } catch (_) {
+      // Fallback
     }
-    return _events.where((e) => e.category.toLowerCase() == category.toLowerCase()).toList();
+
+    if (category == 'All') {
+      return List<EventModel>.from(_fallbackEvents);
+    }
+    return _fallbackEvents
+        .where((e) => e.category.toLowerCase() == category.toLowerCase())
+        .toList();
   }
 
-  // Toggle bookmark status
+  // Toggle bookmark
   Future<bool> toggleBookmark(int id) async {
-    final index = _events.indexWhere((e) => e.id == id);
+    final index = _fallbackEvents.indexWhere((e) => e.id == id);
     if (index != -1) {
-      final current = _events[index];
-      _events[index] = current.copyWith(isBookmarked: !current.isBookmarked);
-      return _events[index].isBookmarked;
+      final current = _fallbackEvents[index];
+      _fallbackEvents[index] = current.copyWith(isBookmarked: !current.isBookmarked);
+      return _fallbackEvents[index].isBookmarked;
     }
     return false;
   }
