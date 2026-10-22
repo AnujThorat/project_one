@@ -1,6 +1,3 @@
-// lib/models/post_model.dart
-// Exactly matches GetAllPostsModel structure with JSONPlaceholder compatibility
-
 class GetAllPostsModel {
   final int? userId;
   final int? id;
@@ -8,9 +5,9 @@ class GetAllPostsModel {
   final String? body;
 
   final String? authorName;
-  final String? authorRole; 
-  final String? date;       
-  final String? category;   
+  final String? authorRole;
+  final String? date;
+  final String? category;
 
   GetAllPostsModel({
     this.userId,
@@ -22,7 +19,6 @@ class GetAllPostsModel {
     this.date,
     this.category,
   });
-
 
   factory GetAllPostsModel.fromJson(Map<String, dynamic> json) {
     return GetAllPostsModel(
@@ -41,7 +37,6 @@ class GetAllPostsModel {
     );
   }
 
-  // Convert model to JSON map for POST / PUT requests
   Map<String, dynamic> toJson() {
     return {
       'userId': userId ?? 1,
@@ -55,7 +50,6 @@ class GetAllPostsModel {
     };
   }
 
-  // Create a copy with updated fields
   GetAllPostsModel copyWith({
     int? userId,
     int? id,

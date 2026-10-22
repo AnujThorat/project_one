@@ -1,6 +1,3 @@
-// lib/widgets/custom_bottom_nav.dart
-// Custom persistent bottom navigation bar matching the storyboard design
-
 import 'package:flutter/material.dart';
 
 class CustomBottomNav extends StatelessWidget {
@@ -36,8 +33,8 @@ class CustomBottomNav extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.white,
           elevation: 0,
-          selectedItemColor: const Color(0xFF1A237E), // Deep Indigo
-          unselectedItemColor: const Color(0xFF94A3B8), // Slate grey
+          selectedItemColor: const Color(0xFF1A237E),
+          unselectedItemColor: const Color(0xFF94A3B8),
           selectedFontSize: 11,
           unselectedFontSize: 11,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),

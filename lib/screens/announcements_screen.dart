@@ -1,6 +1,3 @@
-// lib/screens/announcements_screen.dart
-// Announcements list screen using FutureBuilder with full CRUD interactions and FAB
-
 import 'package:flutter/material.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
@@ -20,11 +17,9 @@ class AnnouncementsScreen extends StatefulWidget {
 }
 
 class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
-  // Repository pattern: instantiate directly inside the widget
   final PostRepository _postRepository = PostRepository();
   late Future<List<GetAllPostsModel>> _postsFuture;
 
-  // Search controller as required
   final TextEditingController _searchController = TextEditingController();
   bool _isSearchVisible = false;
   String _searchQuery = '';
@@ -41,7 +36,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
     super.dispose();
   }
 
-  // Refresh data using setState as strictly instructed
   void _loadAnnouncements() {
     setState(() {
       _postsFuture = _postRepository.fetchPosts();
@@ -78,7 +72,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
               backgroundColor: Colors.redAccent,
             ),
           );
-          // Refresh list using setState
           _loadAnnouncements();
         }
       } catch (e) {
@@ -100,7 +93,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
     );
 
     if (result == true) {
-      // Refresh list after creation
       _loadAnnouncements();
     }
   }
@@ -114,7 +106,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
     );
 
     if (result == true) {
-      // Refresh list after update
       _loadAnnouncements();
     }
   }
@@ -203,7 +194,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
           child: FutureBuilder<List<GetAllPostsModel>>(
             future: _postsFuture,
             builder: (context, snapshot) {
-              // 1. Loading state
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(
@@ -212,7 +202,6 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                 );
               }
 
-              // 2. Error state
               if (snapshot.hasError) {
                 return Center(
                   child: Column(
@@ -234,10 +223,8 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                 );
               }
 
-              // 3. Success state
               var posts = snapshot.data ?? [];
 
-              // Apply search filter if query is not empty
               if (_searchQuery.isNotEmpty) {
                 posts = posts.where((p) {
                   final titleMatch = (p.title ?? '').toLowerCase().contains(_searchQuery);
@@ -297,7 +284,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToCreate,
-        backgroundColor: const Color(0xFF1A237E), // Deep Indigo
+        backgroundColor: const Color(0xFF1A237E),
         foregroundColor: Colors.white,
         elevation: 4,
         shape: const CircleBorder(),

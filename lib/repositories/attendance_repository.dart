@@ -1,6 +1,3 @@
-// lib/repositories/attendance_repository.dart
-// Repository for student attendance records with REST API integration
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/attendance_model.dart';
@@ -49,7 +46,6 @@ class AttendanceRepository {
     ],
   );
 
-  // Fetch student attendance summary from Dummy REST API via HTTP GET
   Future<AttendanceSummaryModel> fetchAttendance() async {
     try {
       final response = await http
@@ -60,9 +56,7 @@ class AttendanceRepository {
         final Map<String, dynamic> data = jsonDecode(response.body);
         return AttendanceSummaryModel.fromJson(data);
       }
-    } catch (_) {
-      // Fallback
-    }
+    } catch (_) {}
 
     return _fallbackSummary;
   }

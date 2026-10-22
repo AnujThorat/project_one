@@ -1,6 +1,3 @@
-// lib/models/attendance_model.dart
-// Model for attendance tracking per subject and overall aggregate
-
 class SubjectAttendanceModel {
   final int id;
   final String subject;

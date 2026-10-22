@@ -1,6 +1,3 @@
-// lib/widgets/announcement_card.dart
-// Card component to display an announcement with tags, author info, and Edit/Delete actions
-
 import 'package:flutter/material.dart';
 import '../models/post_model.dart';
 
@@ -23,14 +20,14 @@ class AnnouncementCard extends StatelessWidget {
   Color _getCategoryColor(String? category) {
     switch (category?.toLowerCase()) {
       case 'academics':
-        return const Color(0xFF1976D2); // Vibrant Blue
+        return const Color(0xFF1976D2);
       case 'events':
-        return const Color(0xFF9C27B0); // Vibrant Purple
+        return const Color(0xFF9C27B0);
       case 'career':
-        return const Color(0xFF00897B); // Teal
+        return const Color(0xFF00897B);
       case 'general':
       default:
-        return const Color(0xFF0288D1); // Light Blue / Cyan
+        return const Color(0xFF0288D1);
     }
   }
 
@@ -59,7 +56,6 @@ class AnnouncementCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Top row: Author avatar, Name & Role, and Edit/Delete menu
             Row(
               children: [
                 CircleAvatar(
@@ -142,8 +138,6 @@ class AnnouncementCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-
-            // Announcement Title
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -163,8 +157,6 @@ class AnnouncementCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 6),
-
-            // Body text
             Text(
               post.body ?? '',
               maxLines: 3,
@@ -176,8 +168,6 @@ class AnnouncementCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-
-            // Bottom metadata: Date on left, Category tag badge on right
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

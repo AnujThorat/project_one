@@ -1,6 +1,3 @@
-// lib/screens/events_screen.dart
-// Campus events and clubs screen with category filter and FutureBuilder
-
 import 'package:flutter/material.dart';
 import '../models/event_model.dart';
 import '../repositories/event_repository.dart';
@@ -17,7 +14,6 @@ class EventsScreen extends StatefulWidget {
 }
 
 class _EventsScreenState extends State<EventsScreen> {
-  // Repository pattern: instantiate repository directly inside widget
   final EventRepository _eventRepository = EventRepository();
   late Future<List<EventModel>> _eventsFuture;
 
@@ -132,7 +128,6 @@ class _EventsScreenState extends State<EventsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Category Filter Pills matching storyboard
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -172,7 +167,6 @@ class _EventsScreenState extends State<EventsScreen> {
 
             const SizedBox(height: 16),
 
-            // 4 Category Quick Cards matching storyboard
             Row(
               children: [
                 _buildCategoryBox(
@@ -216,7 +210,6 @@ class _EventsScreenState extends State<EventsScreen> {
 
             const SizedBox(height: 24),
 
-            // Upcoming Events Section Header
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -247,7 +240,6 @@ class _EventsScreenState extends State<EventsScreen> {
 
             const SizedBox(height: 12),
 
-            // Events List using FutureBuilder as strictly required
             FutureBuilder<List<EventModel>>(
               future: _eventsFuture,
               builder: (context, snapshot) {
@@ -304,7 +296,6 @@ class _EventsScreenState extends State<EventsScreen> {
                       ),
                       child: Row(
                         children: [
-                          // Left Icon Container
                           Container(
                             width: 44,
                             height: 44,
@@ -324,7 +315,6 @@ class _EventsScreenState extends State<EventsScreen> {
                           ),
                           const SizedBox(width: 12),
 
-                          // Event Details
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -385,7 +375,6 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
 
-                          // Right Illustration Graphic / Thumbnail
                           Container(
                             width: 60,
                             height: 60,

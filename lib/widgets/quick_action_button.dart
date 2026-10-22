@@ -1,6 +1,3 @@
-// lib/widgets/quick_action_button.dart
-// Interactive quick action button card for the Home screen
-
 import 'package:flutter/material.dart';
 
 class QuickActionButton extends StatelessWidget {

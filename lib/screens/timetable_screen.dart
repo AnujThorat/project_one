@@ -1,6 +1,3 @@
-// lib/screens/timetable_screen.dart
-// Class schedule timetable screen with day selector and FutureBuilder
-
 import 'package:flutter/material.dart';
 import '../models/timetable_model.dart';
 import '../repositories/timetable_repository.dart';
@@ -17,7 +14,6 @@ class TimetableScreen extends StatefulWidget {
 }
 
 class _TimetableScreenState extends State<TimetableScreen> {
-  // Repository pattern: instantiate repository directly inside widget
   final TimetableRepository _timetableRepository = TimetableRepository();
   late Future<List<TimetableModel>> _timetableFuture;
 
@@ -101,7 +97,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
       ),
       body: Column(
         children: [
-          // Horizontal Day & Date Selector matching storyboard
           Container(
             color: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 12),
@@ -158,7 +153,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
 
           const Divider(height: 1, color: Color(0xFFE2E8F0)),
 
-          // Schedule List using FutureBuilder as strictly required
           Expanded(
             child: FutureBuilder<List<TimetableModel>>(
               future: _timetableFuture,
@@ -222,7 +216,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
                       ),
                       child: Row(
                         children: [
-                          // Left color accent bar
                           Container(
                             width: 5,
                             height: 78,
@@ -236,7 +229,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
                           ),
                           const SizedBox(width: 12),
 
-                          // Icon container
                           Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -251,7 +243,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
                           ),
                           const SizedBox(width: 14),
 
-                          // Subject, Time & Room
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,7 +282,6 @@ class _TimetableScreenState extends State<TimetableScreen> {
                             ),
                           ),
 
-                          // Subject Code Tag
                           Container(
                             margin: const EdgeInsets.only(right: 14),
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

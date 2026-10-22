@@ -1,6 +1,3 @@
-// lib/repositories/event_repository.dart
-// Repository for campus events and student clubs with REST API integration
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/event_model.dart';
@@ -75,7 +72,6 @@ class EventRepository {
     ),
   ];
 
-  // Fetch all events from Dummy REST API via HTTP GET
   Future<List<EventModel>> fetchEvents({String category = 'All'}) async {
     try {
       final url = category == 'All'
@@ -90,9 +86,7 @@ class EventRepository {
         final List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => EventModel.fromJson(json as Map<String, dynamic>)).toList();
       }
-    } catch (_) {
-      // Fallback
-    }
+    } catch (_) {}
 
     if (category == 'All') {
       return List<EventModel>.from(_fallbackEvents);
@@ -102,7 +96,6 @@ class EventRepository {
         .toList();
   }
 
-  // Toggle bookmark
   Future<bool> toggleBookmark(int id) async {
     final index = _fallbackEvents.indexWhere((e) => e.id == id);
     if (index != -1) {

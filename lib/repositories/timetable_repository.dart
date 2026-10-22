@@ -1,6 +1,3 @@
-// lib/repositories/timetable_repository.dart
-// Repository for class timetable schedules with REST API integration
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/timetable_model.dart';
@@ -153,7 +150,6 @@ class TimetableRepository {
     'Sun': [],
   };
 
-  // Fetch timetable for a day from Dummy REST API via HTTP GET
   Future<List<TimetableModel>> fetchTimetable({String day = 'Wed'}) async {
     try {
       final response = await http
@@ -164,9 +160,7 @@ class TimetableRepository {
         final List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => TimetableModel.fromJson(json as Map<String, dynamic>)).toList();
       }
-    } catch (_) {
-      // Fallback
-    }
+    } catch (_) {}
 
     return _fallbackScheduleByDay[day] ?? _fallbackScheduleByDay['Wed'] ?? [];
   }

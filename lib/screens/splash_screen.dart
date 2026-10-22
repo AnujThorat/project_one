@@ -1,6 +1,3 @@
-// lib/screens/splash_screen.dart
-// Initial splash screen with animated loading indicator and branding
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'onboarding_screen.dart';
@@ -61,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF1E2A5E), // Deep Indigo / Navy
+              Color(0xFF1E2A5E),
               Color(0xFF131A3A),
               Color(0xFF0F172A),
             ],
@@ -73,11 +70,9 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               const SizedBox(height: 40),
 
-              // Center Logo & App Title
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Logo container with graduation cap & 'C' emblem
                   Container(
                     width: 90,
                     height: 90,
@@ -100,7 +95,6 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          // Base 'C' letterform
                           Text(
                             'C',
                             style: TextStyle(
@@ -116,7 +110,6 @@ class _SplashScreenState extends State<SplashScreen> {
                               ],
                             ),
                           ),
-                          // Graduation cap icon on top
                           Positioned(
                             top: 10,
                             right: 12,
@@ -135,7 +128,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  // App Title
                   const Text(
                     'CampusConnect',
                     style: TextStyle(
@@ -147,7 +139,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                   const SizedBox(height: 8),
 
-                  // Subtitle
                   Text(
                     'Connect  •  Learn  •  Grow',
                     style: TextStyle(
@@ -160,7 +151,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
 
-              // Bottom Section: College Info & Loading Bar
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
                 child: Column(
@@ -184,7 +174,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                     const SizedBox(height: 28),
 
-                    // Teal Progress Bar
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: SizedBox(
@@ -193,7 +182,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           value: _progress,
                           backgroundColor: Colors.white.withOpacity(0.12),
                           valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFF00ADB5), // Vibrant Teal
+                            Color(0xFF00ADB5),
                           ),
                         ),
                       ),

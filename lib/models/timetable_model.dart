@@ -1,6 +1,3 @@
-// lib/models/timetable_model.dart
-// Model for daily class schedule items
-
 class TimetableModel {
   final int id;
   final String subject;
@@ -8,7 +5,7 @@ class TimetableModel {
   final String timeSlot;
   final String room;
   final String faculty;
-  final String day; // 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
+  final String day;
   final int colorValue;
 
   TimetableModel({

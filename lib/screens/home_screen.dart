@@ -1,6 +1,3 @@
-// lib/screens/home_screen.dart
-// Main Dashboard with greeting, weather card, quick actions, and latest announcements
-
 import 'package:flutter/material.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
@@ -20,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Repository instance created directly inside widget as required
   final PostRepository _postRepository = PostRepository();
   late Future<List<GetAllPostsModel>> _postsFuture;
 
@@ -135,7 +131,6 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Weather & Campus Card
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
@@ -207,7 +202,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 20),
 
-              // 4 Quick Actions in 2x2 Grid matching storyboard
               GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -269,7 +263,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 24),
 
-              // Section: Latest Announcements
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -302,7 +295,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 12),
 
-              // FutureBuilder for API data loading as strictly required
               FutureBuilder<List<GetAllPostsModel>>(
                 future: _postsFuture,
                 builder: (context, snapshot) {
@@ -346,7 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
 
-                  // Display top 3 latest announcements matching the storyboard design
                   final displayPosts = posts.take(3).toList();
 
                   return ListView.separated(

@@ -1,13 +1,10 @@
-// lib/models/event_model.dart
-// Model representing college events and club activities
-
 class EventModel {
   final int id;
   final String title;
   final String date;
   final String time;
   final String location;
-  final String category; // 'Cultural', 'Technical', 'Sports', 'Clubs'
+  final String category;
   final String description;
   final String organizer;
   final int colorValue;

@@ -1,6 +1,3 @@
-// lib/screens/login_screen.dart
-// Authentication screen matching storyboard layout with tabs, inputs, and social logins
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -15,7 +12,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // Required: Use TextEditingController for every text field
   final TextEditingController _usernameController =
       TextEditingController(text: 'alex.johnson@riverside.edu');
   final TextEditingController _passwordController =
@@ -23,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _rememberMe = true;
   bool _obscurePassword = true;
-  bool _isLoginTab = true; // Toggle between Login and Register tabs
+  bool _isLoginTab = true;
 
   @override
   void dispose() {
@@ -47,15 +43,12 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      // Make HTTP POST call to Dummy Authentication API
       await http.post(
         Uri.parse(ApiConstants.loginEndpoint),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'email': username, 'password': password}),
       ).timeout(const Duration(seconds: 2));
-    } catch (_) {
-      // Offline fallback allows seamless navigation
-    }
+    } catch (_) {}
 
     if (mounted) {
       Navigator.pushReplacement(
@@ -72,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Top Campus Banner with Logo
             Container(
               width: double.infinity,
               height: 230,
@@ -81,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF1E2A5E), // Deep Indigo
+                    Color(0xFF1E2A5E),
                     Color(0xFF1A237E),
                     Color(0xFF0D47A1),
                   ],
@@ -95,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Campus Logo
                     Container(
                       width: 58,
                       height: 58,
@@ -147,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  // Segmented Switch: Login / Register
                   Container(
                     height: 46,
                     decoration: BoxDecoration(
@@ -219,7 +209,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 24),
 
-                  // Email or Roll Number Field
                   TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
@@ -246,7 +235,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 16),
 
-                  // Password Field
                   TextField(
                     controller: _passwordController,
                     obscureText: _obscurePassword,
@@ -286,7 +274,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 12),
 
-                  // Remember Me & Forgot Password Row
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -339,7 +326,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Login / Register Submit Button
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -365,7 +351,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 24),
 
-                  // "or continue with" Divider
                   Row(
                     children: [
                       const Expanded(child: Divider(color: Color(0xFFE2E8F0))),
@@ -386,7 +371,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 20),
 
-                  // 3 Social Login Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -412,7 +396,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   const SizedBox(height: 24),
 
-                  // Bottom Link: Don't have an account? Register
                   GestureDetector(
                     onTap: () {
                       setState(() {

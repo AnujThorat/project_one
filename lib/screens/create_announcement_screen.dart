@@ -1,6 +1,3 @@
-// lib/screens/create_announcement_screen.dart
-// Screen to compose and publish a new campus announcement using POST
-
 import 'package:flutter/material.dart';
 import '../repositories/post_repository.dart';
 
@@ -12,10 +9,8 @@ class CreateAnnouncementScreen extends StatefulWidget {
 }
 
 class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
-  // Repository pattern: instantiate repository directly inside widget
   final PostRepository _postRepository = PostRepository();
 
-  // Required: Use TextEditingController for every text field
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _bodyController = TextEditingController();
 
@@ -50,14 +45,10 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
     });
 
     try {
-      // POST call to API
       await _postRepository.createPost(
         title: title,
         body: body,
         userId: 1,
-        authorName: 'Alex Johnson',
-        authorRole: 'Student Council',
-        category: _selectedCategory,
       );
 
       if (mounted) {
@@ -67,7 +58,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
             backgroundColor: Color(0xFF00897B),
           ),
         );
-        Navigator.pop(context, true); // Return true so list refreshes
+        Navigator.pop(context, true);
       }
     } catch (e) {
       if (mounted) {
@@ -121,7 +112,6 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title Label
             const Text(
               'Title *',
               style: TextStyle(
@@ -131,8 +121,6 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Title Input Controller
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
@@ -155,10 +143,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Body Label
             const Text(
               'Body *',
               style: TextStyle(
@@ -168,8 +153,6 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Body Multiline Input Controller
             TextField(
               controller: _bodyController,
               maxLines: 6,
@@ -194,10 +177,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Category Label
             const Text(
               'Category *',
               style: TextStyle(
@@ -207,8 +187,6 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Category Dropdown
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               decoration: BoxDecoration(
@@ -250,17 +228,14 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 36),
-
-            // Submit Button
             SizedBox(
               width: double.infinity,
               height: 52,
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _submitAnnouncement,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1A237E), // Deep Indigo
+                  backgroundColor: const Color(0xFF1A237E),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(26),

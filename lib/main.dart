@@ -1,7 +1,3 @@
-// lib/main.dart
-// CampusConnect - College Management Mobile Application
-// Material 3 Design with Deep Indigo + Teal Color Palette
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/splash_screen.dart';
@@ -10,10 +6,8 @@ import 'services/mock_api_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Automatically start embedded Dummy REST API server for testing
   await MockApiService.startServer();
 
-  // Set system UI overlay style for seamless status bar integration
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -35,9 +29,9 @@ class CampusConnectApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1A237E), // Deep Indigo
+          seedColor: const Color(0xFF1A237E),
           primary: const Color(0xFF1A237E),
-          secondary: const Color(0xFF00ADB5), // Vibrant Teal
+          secondary: const Color(0xFF00ADB5),
           surface: Colors.white,
           background: const Color(0xFFF8FAFC),
         ),

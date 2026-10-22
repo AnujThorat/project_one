@@ -1,6 +1,3 @@
-// lib/screens/edit_announcement_screen.dart
-// Screen to edit an existing announcement using PUT request
-
 import 'package:flutter/material.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
@@ -15,10 +12,8 @@ class EditAnnouncementScreen extends StatefulWidget {
 }
 
 class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
-  // Repository pattern: instantiate repository directly inside widget
   final PostRepository _postRepository = PostRepository();
 
-  // Required: Use TextEditingController for every text field
   late final TextEditingController _titleController;
   late final TextEditingController _bodyController;
 
@@ -30,7 +25,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
   @override
   void initState() {
     super.initState();
-    // Pre-fill controllers with existing post data
     _titleController = TextEditingController(text: widget.post.title ?? '');
     _bodyController = TextEditingController(text: widget.post.body ?? '');
     _selectedCategory = _categories.contains(widget.post.category)
@@ -64,13 +58,11 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
     });
 
     try {
-      // PUT call to API
       await _postRepository.updatePost(
         id: widget.post.id ?? 1,
         title: title,
         body: body,
         userId: widget.post.userId ?? 1,
-        category: _selectedCategory,
       );
 
       if (mounted) {
@@ -80,7 +72,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
             backgroundColor: Color(0xFF00897B),
           ),
         );
-        Navigator.pop(context, true); // Return true so list refreshes
+        Navigator.pop(context, true);
       }
     } catch (e) {
       if (mounted) {
@@ -134,7 +126,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Title Label
             const Text(
               'Title *',
               style: TextStyle(
@@ -144,8 +135,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Pre-filled Title Controller
             TextField(
               controller: _titleController,
               decoration: InputDecoration(
@@ -166,10 +155,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Body Label
             const Text(
               'Body *',
               style: TextStyle(
@@ -179,8 +165,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Pre-filled Body Controller
             TextField(
               controller: _bodyController,
               maxLines: 6,
@@ -202,10 +186,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Category Label
             const Text(
               'Category *',
               style: TextStyle(
@@ -215,8 +196,6 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
               ),
             ),
             const SizedBox(height: 8),
-
-            // Category Dropdown
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
               decoration: BoxDecoration(
@@ -258,10 +237,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
                 ),
               ),
             ),
-
             const SizedBox(height: 36),
-
-            // Update Submit Button
             SizedBox(
               width: double.infinity,
               height: 52,

@@ -1,6 +1,3 @@
-// lib/screens/onboarding_screen.dart
-// Onboarding flow with PageView (3 pages) matching storyboard illustrations and copy
-
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
@@ -73,7 +70,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Background campus building outline
             Positioned(
               top: 40,
               child: Icon(
@@ -82,7 +78,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 color: Colors.blueGrey.withOpacity(0.3),
               ),
             ),
-            // Trees and nature
             Positioned(
               left: 45,
               bottom: 50,
@@ -93,7 +88,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               bottom: 50,
               child: Icon(Icons.park, size: 45, color: Colors.green.shade400),
             ),
-            // Student walking with backpack
             Positioned(
               bottom: 30,
               child: Row(
@@ -131,7 +125,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Timetable board
             Container(
               width: 150,
               height: 120,
@@ -168,7 +161,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ],
               ),
             ),
-            // Clock icon
             Positioned(
               right: 35,
               bottom: 45,
@@ -185,7 +177,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       );
     } else {
-      // Events illustration
       return Container(
         width: 260,
         height: 240,
@@ -203,7 +194,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Stage banner
             Positioned(
               top: 40,
               child: Container(
@@ -223,7 +213,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            // Musical instruments & stage lights
             Positioned(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -234,7 +223,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ],
               ),
             ),
-            // Audience cheering
             Positioned(
               bottom: 30,
               child: Row(
@@ -260,7 +248,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Top Row: Step Indicator ("1/3", "2/3", "3/3") and Skip button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: Row(
@@ -289,7 +276,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // PageView Area
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -335,12 +321,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // Bottom Area: Dots Indicator & Action Button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
               child: Column(
                 children: [
-                  // 3 Dot Indicators
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
@@ -361,14 +345,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 28),
 
-                  // Button ("Next →" or "Get Started")
                   SizedBox(
                     width: double.infinity,
                     height: 52,
                     child: ElevatedButton(
                       onPressed: _onNext,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1A237E), // Deep Indigo
+                        backgroundColor: const Color(0xFF1A237E),
                         foregroundColor: Colors.white,
                         elevation: 2,
                         shape: RoundedRectangleBorder(

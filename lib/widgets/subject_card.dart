@@ -1,6 +1,3 @@
-// lib/widgets/subject_card.dart
-// Card component to display attendance status for an individual subject
-
 import 'package:flutter/material.dart';
 import '../models/attendance_model.dart';
 

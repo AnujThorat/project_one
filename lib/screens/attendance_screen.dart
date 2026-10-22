@@ -1,6 +1,3 @@
-// lib/screens/attendance_screen.dart
-// Attendance tracking screen with overall percentage card, subject breakdown, and calendar preview
-
 import 'package:flutter/material.dart';
 import '../models/attendance_model.dart';
 import '../repositories/attendance_repository.dart';
@@ -19,7 +16,6 @@ class AttendanceScreen extends StatefulWidget {
 }
 
 class _AttendanceScreenState extends State<AttendanceScreen> {
-  // Repository pattern: instantiate repository directly inside widget
   final AttendanceRepository _attendanceRepository = AttendanceRepository();
   late Future<AttendanceSummaryModel> _attendanceFuture;
 
@@ -114,7 +110,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Top Overall Attendance Hero Card matching storyboard
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(20),
@@ -123,7 +118,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        Color(0xFF1E2A5E), // Deep Indigo
+                        Color(0xFF1E2A5E),
                         Color(0xFF1A237E),
                       ],
                     ),
@@ -138,7 +133,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   ),
                   child: Row(
                     children: [
-                      // Circular indicator showing overall 87%
                       Stack(
                         alignment: Alignment.center,
                         children: [
@@ -150,7 +144,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                               strokeWidth: 8,
                               backgroundColor: Colors.white.withOpacity(0.18),
                               valueColor: const AlwaysStoppedAnimation<Color>(
-                                Color(0xFF00ADB5), // Cyan/Teal
+                                Color(0xFF00ADB5),
                               ),
                             ),
                           ),
@@ -165,7 +159,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         ],
                       ),
                       const SizedBox(width: 22),
-                      // Text Info
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -204,7 +197,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
                 const SizedBox(height: 22),
 
-                // Subjects Header
                 const Text(
                   'Subject Breakdown',
                   style: TextStyle(
@@ -214,13 +206,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   ),
                 ),
                 const SizedBox(height: 12),
-
-                // List of SubjectCards
                 ...data.subjects.map((sub) => SubjectCard(subject: sub)),
-
                 const SizedBox(height: 16),
-
-                // Mini Calendar View matching storyboard: "April 2025"
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(

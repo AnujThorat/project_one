@@ -1,6 +1,3 @@
-// lib/services/mock_api_service.dart
-// Embedded In-App Mock API HTTP Server for seamless execution without external terminal setup
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -9,7 +6,6 @@ class MockApiService {
   static HttpServer? _server;
   static bool _isRunning = false;
 
-  // In-Memory dynamic DB
   static final Map<String, dynamic> _db = {
     'posts': [
       {
@@ -302,7 +298,6 @@ class MockApiService {
     },
   };
 
-  /// Start the internal HTTP server on loopback port 8080
   static Future<void> startServer() async {
     if (kIsWeb || _isRunning) return;
 
@@ -327,7 +322,6 @@ class MockApiService {
         final path = request.uri.path;
         final method = request.method;
 
-        // 1. Posts CRUD
         if (path == '/api/posts') {
           final List<Map<String, dynamic>> postsList = _db['posts'] as List<Map<String, dynamic>>;
           if (method == 'GET') {
@@ -404,7 +398,6 @@ class MockApiService {
           }
         }
 
-        // 2. Events
         if (path == '/api/events' && method == 'GET') {
           final cat = request.uri.queryParameters['category'];
           final List<Map<String, dynamic>> events = _db['events'] as List<Map<String, dynamic>>;
@@ -420,7 +413,6 @@ class MockApiService {
           return;
         }
 
-        // 3. Timetable
         if (path == '/api/timetable' && method == 'GET') {
           final day = request.uri.queryParameters['day'] ?? 'Wed';
           final Map<String, dynamic> timetable = _db['timetable'] as Map<String, dynamic>;
@@ -431,7 +423,6 @@ class MockApiService {
           return;
         }
 
-        // 4. Attendance
         if (path == '/api/attendance' && method == 'GET') {
           final att = _db['attendance'];
           res.statusCode = HttpStatus.ok;
@@ -445,7 +436,6 @@ class MockApiService {
         await res.close();
       });
     } catch (e) {
-      // If port 8080 is already taken (e.g. standalone server is already running), that's fine!
       debugPrint('Mock API Server already running or port unavailable: $e');
     }
   }

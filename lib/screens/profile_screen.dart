@@ -1,6 +1,3 @@
-// lib/screens/profile_screen.dart
-// Student profile screen with academic credentials, statistics, and logout functionality
-
 import 'package:flutter/material.dart';
 import '../widgets/custom_bottom_nav.dart';
 import 'home_screen.dart';
@@ -163,7 +160,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Column(
           children: [
-            // Student Profile Card
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
@@ -236,7 +232,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 16),
 
-            // Academic Stats Row
             Row(
               children: [
                 _buildStatBox('CGPA', '8.94', const Color(0xFF1A237E)),
@@ -249,7 +244,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 20),
 
-            // Settings & College Sections
             _buildMenuOption(
               icon: Icons.person_outline,
               title: 'Personal Information',
@@ -283,7 +277,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             const SizedBox(height: 16),
 
-            // Logout Button matching storyboard
             SizedBox(
               width: double.infinity,
               height: 48,
