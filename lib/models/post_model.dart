@@ -7,11 +7,10 @@ class GetAllPostsModel {
   final String? title;
   final String? body;
 
-  // Extra metadata fields to support rich campus announcement display
   final String? authorName;
-  final String? authorRole; // e.g. "Faculty", "Student Body", "Admin"
-  final String? date;       // e.g. "Apr 25, 2025"
-  final String? category;   // e.g. "Academics", "Events", "General", "Career"
+  final String? authorRole; 
+  final String? date;       
+  final String? category;   
 
   GetAllPostsModel({
     this.userId,
@@ -24,7 +23,7 @@ class GetAllPostsModel {
     this.category,
   });
 
-  // Factory constructor to parse JSON from API or local storage
+
   factory GetAllPostsModel.fromJson(Map<String, dynamic> json) {
     return GetAllPostsModel(
       userId: json['userId'] is int
