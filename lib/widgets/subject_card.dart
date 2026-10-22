@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/attendance_model.dart';
 
 class SubjectCard extends StatelessWidget {
@@ -30,7 +31,7 @@ class SubjectCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFF1F5F9), width: 1.2),
+        border: Border.all(color: AppColors.borderLight, width: 1.2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.02),

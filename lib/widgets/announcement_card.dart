@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/post_model.dart';
 
 class AnnouncementCard extends StatelessWidget {
@@ -20,14 +21,14 @@ class AnnouncementCard extends StatelessWidget {
   Color _getCategoryColor(String? category) {
     switch (category?.toLowerCase()) {
       case 'academics':
-        return const Color(0xFF1976D2);
+        return AppColors.academic;
       case 'events':
-        return const Color(0xFF9C27B0);
+        return AppColors.events;
       case 'career':
-        return const Color(0xFF00897B);
+        return AppColors.career;
       case 'general':
       default:
-        return const Color(0xFF0288D1);
+        return AppColors.general;
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
 import '../widgets/announcement_card.dart';
@@ -134,13 +135,13 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: const Icon(Icons.arrow_back, color: AppColors.textDark),
           onPressed: () => Navigator.pop(context),
         ),
         title: _isSearchVisible
@@ -150,7 +151,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                 decoration: const InputDecoration(
                   hintText: 'Search announcements...',
                   border: InputBorder.none,
-                  hintStyle: TextStyle(fontSize: 14, color: Color(0xFF94A3B8)),
+                  hintStyle: TextStyle(fontSize: 14, color: AppColors.textMuted),
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -163,14 +164,14 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF0F172A),
+                  color: AppColors.textPrimary,
                 ),
               ),
         actions: [
           IconButton(
             icon: Icon(
               _isSearchVisible ? Icons.close : Icons.search,
-              color: const Color(0xFF1E293B),
+              color: AppColors.textDark,
             ),
             onPressed: () {
               setState(() {
@@ -197,7 +198,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A237E)),
+                    valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                   ),
                 );
               }
@@ -207,14 +208,14 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.error_outline, size: 48, color: Colors.redAccent),
+                      const Icon(Icons.error_outline, size: 48, color: AppColors.error),
                       const SizedBox(height: 12),
                       Text('Error: ${snapshot.error}'),
                       const SizedBox(height: 12),
                       ElevatedButton(
                         onPressed: _loadAnnouncements,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1A237E),
+                          backgroundColor: AppColors.primary,
                         ),
                         child: const Text('Try Again', style: TextStyle(color: Colors.white)),
                       ),
@@ -239,7 +240,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.campaign_outlined, size: 64, color: Color(0xFFCBD5E1)),
+                      const Icon(Icons.campaign_outlined, size: 64, color: AppColors.borderDark),
                       const SizedBox(height: 12),
                       Text(
                         _searchQuery.isNotEmpty
@@ -247,7 +248,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                             : 'No announcements posted yet.',
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Color(0xFF64748B),
+                          color: AppColors.textSecondary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -257,7 +258,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
                         icon: const Icon(Icons.add, color: Colors.white),
                         label: const Text('Create Announcement', style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1A237E),
+                          backgroundColor: AppColors.primary,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                         ),
                       ),
@@ -284,7 +285,7 @@ class _AnnouncementsScreenState extends State<AnnouncementsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _navigateToCreate,
-        backgroundColor: const Color(0xFF1A237E),
+        backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         elevation: 4,
         shape: const CircleBorder(),

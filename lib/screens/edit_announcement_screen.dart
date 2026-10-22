@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
 
@@ -18,7 +19,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
   late final TextEditingController _bodyController;
 
   late String _selectedCategory;
-  final List<String> _categories = ['Career', 'Academics', 'Events', 'General'];
+  final List<String> _categories = AppConstants.announcementCategories;
 
   bool _isLoading = false;
 
@@ -47,7 +48,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please fill in both Title and Body fields'),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: AppColors.error,
         ),
       );
       return;
@@ -69,7 +70,7 @@ class _EditAnnouncementScreenState extends State<EditAnnouncementScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Announcement updated successfully!'),
-            backgroundColor: Color(0xFF00897B),
+            backgroundColor: AppColors.success,
           ),
         );
         Navigator.pop(context, true);

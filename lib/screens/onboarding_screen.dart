@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import 'login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -336,8 +337,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         height: 8,
                         decoration: BoxDecoration(
                           color: _currentPage == index
-                              ? const Color(0xFF1A237E)
-                              : const Color(0xFFCBD5E1),
+                              ? AppColors.primary
+                              : AppColors.borderDark,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -351,7 +352,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: ElevatedButton(
                       onPressed: _onNext,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF1A237E),
+                        backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
                         elevation: 2,
                         shape: RoundedRectangleBorder(

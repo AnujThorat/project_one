@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/post_model.dart';
 import '../repositories/post_repository.dart';
 import '../widgets/quick_action_button.dart';
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const Text(
-              'Alex Johnson',
+              AppConstants.defaultStudentName,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -158,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       child: const Icon(
-                        Icons.wb_sunny_rounded,
+                        Icons.school_rounded,
                         color: Color(0xFFF59E0B),
                         size: 32,
                       ),
@@ -168,9 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            '24°C  Sunny',
-                            style: TextStyle(
+                          Text(
+                            AppConstants.appName,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                               color: Color(0xFF78350F),
@@ -178,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            'Riverside College • Main Campus',
+                            '${AppConstants.defaultCollegeName} • ${AppConstants.defaultCampusName}',
                             style: TextStyle(
                               fontSize: 12,
                               color: Colors.amber.shade900.withOpacity(0.8),
@@ -410,14 +411,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         color: Color(0xFF64748B),
                                       ),
                                     ),
-                                    const SizedBox(height: 4),
-                                    Text(
-                                      item.date ?? 'Apr 25, 2025',
-                                      style: const TextStyle(
-                                        fontSize: 10,
-                                        color: Color(0xFF94A3B8),
+                                    if (item.date != null && item.date!.isNotEmpty) ...[
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        item.date!,
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          color: Color(0xFF94A3B8),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ],
                                 ),
                               ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import 'onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -58,9 +59,9 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF1E2A5E),
+              AppColors.primaryDark,
               Color(0xFF131A3A),
-              Color(0xFF0F172A),
+              AppColors.primaryDeep,
             ],
           ),
         ),
@@ -80,12 +81,12 @@ class _SplashScreenState extends State<SplashScreen> {
                       color: Colors.white.withOpacity(0.08),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: const Color(0xFF00ADB5).withOpacity(0.4),
+                        color: AppColors.secondary.withOpacity(0.4),
                         width: 2,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF00ADB5).withOpacity(0.25),
+                          color: AppColors.secondary.withOpacity(0.25),
                           blurRadius: 24,
                           spreadRadius: 4,
                         ),
@@ -100,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             style: TextStyle(
                               fontSize: 52,
                               fontWeight: FontWeight.w900,
-                              color: const Color(0xFF00ADB5),
+                              color: AppColors.secondary,
                               shadows: [
                                 Shadow(
                                   color: Colors.black.withOpacity(0.3),
@@ -129,7 +130,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   const SizedBox(height: 20),
 
                   const Text(
-                    'CampusConnect',
+                    AppConstants.appName,
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -140,7 +141,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   const SizedBox(height: 8),
 
                   Text(
-                    'Connect  •  Learn  •  Grow',
+                    AppConstants.appTagline,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
@@ -156,7 +157,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   children: [
                     const Text(
-                      'Riverside College',
+                      AppConstants.defaultCollegeName,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -182,7 +183,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           value: _progress,
                           backgroundColor: Colors.white.withOpacity(0.12),
                           valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFF00ADB5),
+                            AppColors.secondary,
                           ),
                         ),
                       ),

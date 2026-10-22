@@ -25,14 +25,14 @@ class EventModel {
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
-      id: json['id'] is int ? json['id'] as int : int.parse(json['id'].toString()),
+      id: json['id'] is int ? json['id'] as int : (int.tryParse(json['id']?.toString() ?? '') ?? 0),
       title: json['title']?.toString() ?? '',
       date: json['date']?.toString() ?? '',
       time: json['time']?.toString() ?? '',
       location: json['location']?.toString() ?? '',
-      category: json['category']?.toString() ?? 'General',
+      category: json['category']?.toString() ?? '',
       description: json['description']?.toString() ?? '',
-      organizer: json['organizer']?.toString() ?? 'College Council',
+      organizer: json['organizer']?.toString() ?? '',
       colorValue: json['colorValue'] is int ? json['colorValue'] as int : 0xFF6366F1,
       isBookmarked: json['isBookmarked'] == true,
     );

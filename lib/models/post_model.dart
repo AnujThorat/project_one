@@ -30,10 +30,10 @@ class GetAllPostsModel {
           : int.tryParse(json['id']?.toString() ?? ''),
       title: json['title']?.toString() ?? '',
       body: json['body']?.toString() ?? '',
-      authorName: json['authorName']?.toString() ?? 'Dr. Sarah Mitchell',
-      authorRole: json['authorRole']?.toString() ?? 'Faculty',
-      date: json['date']?.toString() ?? 'Apr 25, 2025',
-      category: json['category']?.toString() ?? 'Academics',
+      authorName: json['authorName']?.toString(),
+      authorRole: json['authorRole']?.toString(),
+      date: json['date']?.toString(),
+      category: json['category']?.toString(),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/event_model.dart';
 import '../repositories/event_repository.dart';
 import '../widgets/custom_bottom_nav.dart';
@@ -18,7 +19,7 @@ class _EventsScreenState extends State<EventsScreen> {
   late Future<List<EventModel>> _eventsFuture;
 
   String _selectedCategory = 'All';
-  final List<String> _categories = ['All', 'Cultural', 'Technical', 'Sports', 'Clubs'];
+  final List<String> _categories = AppConstants.eventCategories;
 
   @override
   void initState() {
@@ -172,7 +173,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 _buildCategoryBox(
                   title: 'Cultural',
                   icon: Icons.theater_comedy,
-                  color: const Color(0xFFE91E63),
+                  color: AppColors.cultural,
                   onTap: () {
                     setState(() => _selectedCategory = 'Cultural');
                     _loadEvents();
@@ -181,7 +182,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 _buildCategoryBox(
                   title: 'Technical',
                   icon: Icons.settings,
-                  color: const Color(0xFF0288D1),
+                  color: AppColors.technical,
                   onTap: () {
                     setState(() => _selectedCategory = 'Technical');
                     _loadEvents();
@@ -190,7 +191,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 _buildCategoryBox(
                   title: 'Sports',
                   icon: Icons.sports_soccer,
-                  color: const Color(0xFF43A047),
+                  color: AppColors.sports,
                   onTap: () {
                     setState(() => _selectedCategory = 'Sports');
                     _loadEvents();
@@ -199,7 +200,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 _buildCategoryBox(
                   title: 'Clubs',
                   icon: Icons.groups,
-                  color: const Color(0xFF8E24AA),
+                  color: AppColors.clubs,
                   onTap: () {
                     setState(() => _selectedCategory = 'Clubs');
                     _loadEvents();

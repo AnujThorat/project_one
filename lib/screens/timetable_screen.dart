@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../models/timetable_model.dart';
 import '../repositories/timetable_repository.dart';
 import '../widgets/custom_bottom_nav.dart';
@@ -77,13 +78,13 @@ class _TimetableScreenState extends State<TimetableScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         scrolledUnderElevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
+          icon: const Icon(Icons.arrow_back, color: AppColors.textDark),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -91,7 +92,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF0F172A),
+            color: AppColors.textPrimary,
           ),
         ),
       ),
@@ -120,8 +121,8 @@ class _TimetableScreenState extends State<TimetableScreen> {
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                           color: isSelected
-                              ? const Color(0xFF1A237E)
-                              : const Color(0xFF94A3B8),
+                              ? AppColors.primary
+                              : AppColors.textMuted,
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -130,7 +131,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
                         height: 36,
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFF1A237E)
+                              ? AppColors.primary
                               : Colors.transparent,
                           shape: BoxShape.circle,
                         ),
@@ -151,7 +152,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
             ),
           ),
 
-          const Divider(height: 1, color: Color(0xFFE2E8F0)),
+          const Divider(height: 1, color: AppColors.border),
 
           Expanded(
             child: FutureBuilder<List<TimetableModel>>(
@@ -160,7 +161,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                     child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A237E)),
+                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                     ),
                   );
                 }

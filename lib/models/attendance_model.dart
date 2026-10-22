@@ -17,10 +17,10 @@ class SubjectAttendanceModel {
 
   factory SubjectAttendanceModel.fromJson(Map<String, dynamic> json) {
     return SubjectAttendanceModel(
-      id: json['id'] is int ? json['id'] as int : int.parse(json['id'].toString()),
+      id: json['id'] is int ? json['id'] as int : (int.tryParse(json['id']?.toString() ?? '') ?? 0),
       subject: json['subject']?.toString() ?? '',
-      attended: json['attended'] is int ? json['attended'] as int : int.parse(json['attended'].toString()),
-      total: json['total'] is int ? json['total'] as int : int.parse(json['total'].toString()),
+      attended: json['attended'] is int ? json['attended'] as int : (int.tryParse(json['attended']?.toString() ?? '') ?? 0),
+      total: json['total'] is int ? json['total'] as int : (int.tryParse(json['total']?.toString() ?? '') ?? 0),
       colorValue: json['colorValue'] is int ? json['colorValue'] as int : 0xFF6366F1,
     );
   }
@@ -57,8 +57,8 @@ class AttendanceSummaryModel {
         .toList();
 
     return AttendanceSummaryModel(
-      totalAttended: json['totalAttended'] is int ? json['totalAttended'] as int : 42,
-      totalClasses: json['totalClasses'] is int ? json['totalClasses'] as int : 48,
+      totalAttended: json['totalAttended'] is int ? json['totalAttended'] as int : (int.tryParse(json['totalAttended']?.toString() ?? '') ?? 0),
+      totalClasses: json['totalClasses'] is int ? json['totalClasses'] as int : (int.tryParse(json['totalClasses']?.toString() ?? '') ?? 0),
       subjects: subjectsList,
     );
   }

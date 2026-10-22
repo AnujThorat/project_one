@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../widgets/custom_bottom_nav.dart';
 import 'home_screen.dart';
 import 'timetable_screen.dart';
@@ -38,14 +39,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Logout'),
-        content: const Text('Are you sure you want to sign out of CampusConnect?'),
+        content: const Text('Are you sure you want to sign out of ${AppConstants.appName}?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
             child: const Text('Cancel'),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+            style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
             onPressed: () {
               Navigator.pop(ctx);
               Navigator.pushAndRemoveUntil(
@@ -68,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFFE2E8F0)),
+          border: Border.all(color: AppColors.border),
         ),
         child: Column(
           children: [
@@ -85,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               label,
               style: const TextStyle(
                 fontSize: 11,
-                color: Color(0xFF64748B),
+                color: AppColors.textSecondary,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -106,31 +107,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: AppColors.border),
       ),
       child: ListTile(
         onTap: onTap,
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: const Color(0xFF1A237E).withOpacity(0.08),
+            color: AppColors.primary.withOpacity(0.08),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(icon, color: const Color(0xFF1A237E), size: 20),
+          child: Icon(icon, color: AppColors.primary, size: 20),
         ),
         title: Text(
           title,
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-            color: Color(0xFF1E293B),
+            color: AppColors.textPrimary,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: const TextStyle(fontSize: 11, color: Color(0xFF64748B)),
+          style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
         ),
-        trailing: const Icon(Icons.chevron_right, color: Color(0xFF94A3B8), size: 18),
+        trailing: const Icon(Icons.chevron_right, color: AppColors.textMuted, size: 18),
       ),
     );
   }
@@ -138,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -152,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF0F172A),
+            color: AppColors.textPrimary,
           ),
         ),
       ),
@@ -165,14 +166,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [Color(0xFF1E2A5E), Color(0xFF1A237E)],
+                  colors: [AppColors.primaryDark, AppColors.primary],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF1A237E).withOpacity(0.2),
+                    color: AppColors.primary.withOpacity(0.2),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -183,18 +184,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CircleAvatar(
                     radius: 36,
                     backgroundColor: Colors.white.withOpacity(0.2),
-                    child: const Text(
-                      'AJ',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                    child: const Icon(
+                      Icons.person,
+                      size: 40,
+                      color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 12),
                   const Text(
-                    'Alex Johnson',
+                    AppConstants.defaultStudentName,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -203,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Roll No: CS-2022-084  •  Semester 6',
+                    'Roll No: ${AppConstants.defaultRollNo}',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white.withOpacity(0.85),
@@ -211,7 +209,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'B.Tech - Computer Science & Engineering',
+                    AppConstants.defaultDepartment,
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.white.withOpacity(0.7),
@@ -219,10 +217,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Riverside College',
-                    style: TextStyle(
+                    AppConstants.defaultCollegeName,
+                    style: const TextStyle(
                       fontSize: 11,
-                      color: const Color(0xFF00ADB5),
+                      color: AppColors.secondary,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -234,11 +232,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             Row(
               children: [
-                _buildStatBox('CGPA', '8.94', const Color(0xFF1A237E)),
+                _buildStatBox('CGPA', '--', AppColors.primary),
                 const SizedBox(width: 10),
-                _buildStatBox('Attendance', '87%', const Color(0xFF00897B)),
+                _buildStatBox('Attendance', '--', AppColors.success),
                 const SizedBox(width: 10),
-                _buildStatBox('Credits', '124', const Color(0xFFE91E63)),
+                _buildStatBox('Credits', '--', AppColors.cultural),
               ],
             ),
 
@@ -247,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildMenuOption(
               icon: Icons.person_outline,
               title: 'Personal Information',
-              subtitle: 'alex.johnson@riverside.edu • +1 (555) 019-2834',
+              subtitle: 'View and manage student profile details',
               onTap: () {},
             ),
             _buildMenuOption(
@@ -259,13 +257,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildMenuOption(
               icon: Icons.account_balance_wallet_outlined,
               title: 'Fee Payments & Receipts',
-              subtitle: 'All semester dues cleared',
+              subtitle: 'Check fee status and payment receipts',
               onTap: () {},
             ),
             _buildMenuOption(
               icon: Icons.library_books_outlined,
               title: 'Library Borrowings',
-              subtitle: '2 active books • Due in 6 days',
+              subtitle: 'Check borrowed books & return dates',
               onTap: () {},
             ),
             _buildMenuOption(
@@ -282,11 +280,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 48,
               child: OutlinedButton.icon(
                 onPressed: _handleLogout,
-                icon: const Icon(Icons.logout, color: Colors.redAccent, size: 20),
+                icon: const Icon(Icons.logout, color: AppColors.error, size: 20),
                 label: const Text(
                   'Logout',
                   style: TextStyle(
-                    color: Colors.redAccent,
+                    color: AppColors.error,
                     fontWeight: FontWeight.w600,
                     fontSize: 14,
                   ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../const/const.dart';
 import '../services/api_constants.dart';
 import 'home_screen.dart';
 
@@ -12,10 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _usernameController =
-      TextEditingController(text: 'alex.johnson@riverside.edu');
-  final TextEditingController _passwordController =
-      TextEditingController(text: 'password123');
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool _rememberMe = true;
   bool _obscurePassword = true;
@@ -73,9 +72,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF1E2A5E),
-                    Color(0xFF1A237E),
-                    Color(0xFF0D47A1),
+                    AppColors.primaryDark,
+                    AppColors.primary,
+                    AppColors.academic,
                   ],
                 ),
                 borderRadius: BorderRadius.only(
@@ -103,14 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const Center(
                         child: Icon(
                           Icons.school,
-                          color: Color(0xFF1A237E),
+                          color: AppColors.primary,
                           size: 32,
                         ),
                       ),
                     ),
                     const SizedBox(height: 12),
                     const Text(
-                      'CampusConnect',
+                      AppConstants.appName,
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -120,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Riverside College',
+                      AppConstants.defaultCollegeName,
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.white.withOpacity(0.85),

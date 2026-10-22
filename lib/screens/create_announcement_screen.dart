@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 import '../repositories/post_repository.dart';
 
 class CreateAnnouncementScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
   final TextEditingController _bodyController = TextEditingController();
 
   String _selectedCategory = 'Career';
-  final List<String> _categories = ['Career', 'Academics', 'Events', 'General'];
+  final List<String> _categories = AppConstants.announcementCategories;
 
   bool _isLoading = false;
 
@@ -34,7 +35,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please fill in both Title and Body fields'),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: AppColors.error,
         ),
       );
       return;
@@ -55,7 +56,7 @@ class _CreateAnnouncementScreenState extends State<CreateAnnouncementScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Announcement created successfully!'),
-            backgroundColor: Color(0xFF00897B),
+            backgroundColor: AppColors.success,
           ),
         );
         Navigator.pop(context, true);

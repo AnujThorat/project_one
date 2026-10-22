@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../const/const.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -14,9 +15,9 @@ class CustomBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         border: const Border(
-          top: BorderSide(color: Color(0xFFE2E8F0), width: 1),
+          top: BorderSide(color: AppColors.border, width: 1),
         ),
         boxShadow: [
           BoxShadow(
@@ -31,36 +32,15 @@ class CustomBottomNav extends StatelessWidget {
           currentIndex: currentIndex,
           onTap: onTap,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.surface,
           elevation: 0,
-          selectedItemColor: const Color(0xFF1A237E),
-          unselectedItemColor: const Color(0xFF94A3B8),
-          selectedFontSize: 11,
-          unselectedFontSize: 11,
+          selectedItemColor: NavBarConstants.selectedItemColor,
+          unselectedItemColor: NavBarConstants.unselectedItemColor,
+          selectedFontSize: NavBarConstants.selectedFontSize,
+          unselectedFontSize: NavBarConstants.unselectedFontSize,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
           unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w500),
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today_outlined),
-              activeIcon: Icon(Icons.calendar_today),
-              label: 'Timetable',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.celebration_outlined),
-              activeIcon: Icon(Icons.celebration),
-              label: 'Events',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
+          items: NavBarConstants.items,
         ),
       ),
     );
