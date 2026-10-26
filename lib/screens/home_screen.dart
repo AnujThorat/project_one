@@ -134,68 +134,74 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFFF7ED), Color(0xFFFEF3C7)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: const Color(0xFFFDE68A), width: 1),
+                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.03),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.amber.withOpacity(0.2),
-                            blurRadius: 8,
-                          ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.school_rounded,
-                        color: Color(0xFFF59E0B),
-                        size: 32,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            AppConstants.appName,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF78350F),
-                            ),
+                          Row(
+                            children: const [
+                              Icon(Icons.wb_sunny_rounded, color: Color(0xFFF59E0B), size: 22),
+                              SizedBox(width: 6),
+                              Text(
+                                '24°C',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF0F172A),
+                                ),
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                'Sunny',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color(0xFF64748B),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 2),
-                          Text(
-                            '${AppConstants.defaultCollegeName} • ${AppConstants.defaultCampusName}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.amber.shade900.withOpacity(0.8),
-                              fontWeight: FontWeight.w500,
-                            ),
+                          const SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Icon(Icons.location_on, size: 14, color: Colors.blue.shade400),
+                              const SizedBox(width: 4),
+                              const Text(
+                                AppConstants.defaultCollegeName,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF334155),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.amber.shade100,
-                        shape: BoxShape.circle,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        'assets/images/campus_banner.png',
+                        width: 110,
+                        height: 68,
+                        fit: BoxFit.cover,
                       ),
-                      child: const Icon(Icons.school, color: Color(0xFFB45309), size: 24),
                     ),
                   ],
                 ),
@@ -428,6 +434,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.chevron_right,
                                 color: Color(0xFF94A3B8),
                                 size: 18,
+                                
                               ),
                             ],
                           ),

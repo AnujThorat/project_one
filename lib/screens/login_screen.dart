@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import '../const/const.dart';
 import '../services/api_constants.dart';
@@ -64,71 +65,87 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 230,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    AppColors.primaryDark,
-                    AppColors.primary,
-                    AppColors.academic,
-                  ],
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/campus_banner.png'),
+                      fit: BoxFit.cover,
+                      opacity: 0.18,
+                    ),
+                  ),
                 ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(32),
-                  bottomRight: Radius.circular(32),
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white.withOpacity(0.2),
+                        Colors.white,
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 58,
-                      height: 58,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.15),
-                            blurRadius: 10,
+                SafeArea(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 68,
+                            height: 68,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.08),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/images/logo.png',
+                                width: 68,
+                                height: 68,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            AppConstants.appName,
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF1E293B),
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            AppConstants.defaultCollegeName,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.school,
-                          color: AppColors.primary,
-                          size: 32,
-                        ),
-                      ),
                     ),
-                    const SizedBox(height: 12),
-                    const Text(
-                      AppConstants.appName,
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: -0.3,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      AppConstants.defaultCollegeName,
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.white.withOpacity(0.85),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
 
             const SizedBox(height: 24),
@@ -374,20 +391,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _buildSocialButton(
-                        icon: Icons.g_mobiledata,
-                        iconColor: Colors.red,
+                        svgAsset: 'assets/icons/google.svg',
                         onTap: _handleLogin,
                       ),
                       const SizedBox(width: 18),
                       _buildSocialButton(
-                        icon: Icons.apple,
-                        iconColor: Colors.black,
+                        svgAsset: 'assets/icons/apple.svg',
                         onTap: _handleLogin,
                       ),
                       const SizedBox(width: 18),
                       _buildSocialButton(
-                        icon: Icons.window,
-                        iconColor: const Color(0xFF0078D4),
+                        svgAsset: 'assets/icons/microsoft.svg',
                         onTap: _handleLogin,
                       ),
                     ],
@@ -434,8 +448,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildSocialButton({
-    required IconData icon,
-    required Color iconColor,
+    required String svgAsset,
     required VoidCallback onTap,
   }) {
     return InkWell(
@@ -457,7 +470,11 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
         child: Center(
-          child: Icon(icon, color: iconColor, size: 26),
+          child: SvgPicture.asset(
+            svgAsset,
+            width: 22,
+            height: 22,
+          ),
         ),
       ),
     );

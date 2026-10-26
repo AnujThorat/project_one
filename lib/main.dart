@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'const/const.dart';
 import 'screens/splash_screen.dart';
 
@@ -26,6 +27,9 @@ class CampusConnectApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        textTheme: GoogleFonts.plusJakartaSansTextTheme(
+          ThemeData.light().textTheme,
+        ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: AppColors.primary,
           primary: AppColors.primary,
@@ -34,14 +38,14 @@ class CampusConnectApp extends StatelessWidget {
           background: AppColors.background,
         ),
         scaffoldBackgroundColor: AppColors.background,
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           backgroundColor: AppColors.surface,
           foregroundColor: AppColors.textPrimary,
           elevation: 0,
           scrolledUnderElevation: 0,
           centerTitle: false,
-          iconTheme: IconThemeData(color: AppColors.textSecondary),
-          titleTextStyle: TextStyle(
+          iconTheme: const IconThemeData(color: AppColors.textSecondary),
+          titleTextStyle: GoogleFonts.plusJakartaSans(
             color: AppColors.textPrimary,
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -75,6 +79,35 @@ class CampusConnectApp extends StatelessWidget {
           ),
         ),
       ),
+      builder: (context, child) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        if (screenWidth > 450) {
+          return Scaffold(
+            backgroundColor: const Color(0xFF0B132B),
+            body: Center(
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 420, maxHeight: 900),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.4),
+                      blurRadius: 36,
+                      spreadRadius: 8,
+                      offset: const Offset(0, 12),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(32),
+                  child: child ?? const SizedBox.shrink(),
+                ),
+              ),
+            ),
+          );
+        }
+        return child ?? const SizedBox.shrink();
+      },
       home: const SplashScreen(),
     );
   }

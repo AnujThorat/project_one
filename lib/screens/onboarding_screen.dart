@@ -53,193 +53,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Widget _buildIllustration(String type) {
+    String assetPath;
     if (type == 'campus') {
-      return Container(
-        width: 260,
-        height: 240,
-        decoration: BoxDecoration(
-          color: const Color(0xFFE8F4F8),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blue.withOpacity(0.08),
-              blurRadius: 20,
-              spreadRadius: 6,
-            ),
-          ],
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: 40,
-              child: Icon(
-                Icons.account_balance,
-                size: 90,
-                color: Colors.blueGrey.withOpacity(0.3),
-              ),
-            ),
-            Positioned(
-              left: 45,
-              bottom: 50,
-              child: Icon(Icons.park, size: 45, color: Colors.green.shade400),
-            ),
-            Positioned(
-              right: 45,
-              bottom: 50,
-              child: Icon(Icons.park, size: 45, color: Colors.green.shade400),
-            ),
-            Positioned(
-              bottom: 30,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1A237E),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(Icons.groups_rounded, color: Colors.white, size: 40),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+      assetPath = 'assets/images/onboarding_1.png';
     } else if (type == 'schedule') {
-      return Container(
-        width: 260,
-        height: 240,
-        decoration: BoxDecoration(
-          color: const Color(0xFFF0FDF4),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.teal.withOpacity(0.08),
-              blurRadius: 20,
-              spreadRadius: 6,
-            ),
-          ],
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              width: 150,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFCBD5E1), width: 1.5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 10,
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.blue.shade100, borderRadius: BorderRadius.circular(4))),
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.orange.shade100, borderRadius: BorderRadius.circular(4))),
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.purple.shade100, borderRadius: BorderRadius.circular(4))),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.teal.shade100, borderRadius: BorderRadius.circular(4))),
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.pink.shade100, borderRadius: BorderRadius.circular(4))),
-                      Container(width: 30, height: 16, decoration: BoxDecoration(color: Colors.green.shade100, borderRadius: BorderRadius.circular(4))),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              right: 35,
-              bottom: 45,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: const BoxDecoration(
-                  color: Color(0xFF00ADB5),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.access_time_filled, color: Colors.white, size: 28),
-              ),
-            ),
-          ],
-        ),
-      );
+      assetPath = 'assets/images/onboarding_2.png';
     } else {
-      return Container(
-        width: 260,
-        height: 240,
-        decoration: BoxDecoration(
-          color: const Color(0xFFFAF5FF),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.purple.withOpacity(0.08),
-              blurRadius: 20,
-              spreadRadius: 6,
-            ),
-          ],
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: 40,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF7C4DFF),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text(
-                  'EVENTS',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.nightlife, size: 70, color: Colors.purple.shade300),
-                  const SizedBox(width: 8),
-                  Icon(Icons.music_note, size: 40, color: Colors.amber.shade600),
-                ],
-              ),
-            ),
-            Positioned(
-              bottom: 30,
-              child: Row(
-                children: List.generate(
-                  5,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
-                    child: Icon(Icons.person, size: 28, color: Colors.indigo.shade300),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+      assetPath = 'assets/images/onboarding_3.png';
     }
+
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 250, maxWidth: 280),
+      child: Image.asset(
+        assetPath,
+        fit: BoxFit.contain,
+      ),
+    );
   }
 
   @override
@@ -250,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -289,29 +118,31 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 itemBuilder: (context, index) {
                   final page = _pages[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    padding: const EdgeInsets.symmetric(horizontal: 28),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _buildIllustration(page['type']),
-                        const SizedBox(height: 40),
+                        Flexible(
+                          child: _buildIllustration(page['type']),
+                        ),
+                        const SizedBox(height: 18),
                         Text(
                           page['title'],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                            fontSize: 24,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF0F172A),
                             letterSpacing: -0.5,
                           ),
                         ),
-                        const SizedBox(height: 14),
+                        const SizedBox(height: 8),
                         Text(
                           page['subtitle'],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                            fontSize: 14,
-                            height: 1.5,
+                            fontSize: 13,
+                            height: 1.4,
                             color: Color(0xFF64748B),
                           ),
                         ),
@@ -323,7 +154,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 20),
               child: Column(
                 children: [
                   Row(
@@ -344,11 +175,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 20),
 
                   SizedBox(
                     width: double.infinity,
-                    height: 52,
+                    height: 50,
                     child: ElevatedButton(
                       onPressed: _onNext,
                       style: ElevatedButton.styleFrom(

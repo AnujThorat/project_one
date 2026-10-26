@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../const/const.dart';
 import '../models/event_model.dart';
 import '../repositories/event_repository.dart';
@@ -6,6 +7,7 @@ import '../widgets/custom_bottom_nav.dart';
 import 'home_screen.dart';
 import 'timetable_screen.dart';
 import 'profile_screen.dart';
+import 'login_screen.dart';
 
 class EventsScreen extends StatefulWidget {
   const EventsScreen({super.key});
@@ -142,14 +144,18 @@ class _EventsScreenState extends State<EventsScreen> {
                       selectedColor: const Color(0xFF1A237E),
                       backgroundColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: isSelected ? Colors.white : const Color(0xFF64748B),
+                        color: isSelected
+                            ? Colors.white
+                            : const Color(0xFF64748B),
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(
-                          color: isSelected ? const Color(0xFF1A237E) : const Color(0xFFE2E8F0),
+                          color: isSelected
+                              ? const Color(0xFF1A237E)
+                              : const Color(0xFFE2E8F0),
                         ),
                       ),
                       onSelected: (selected) {
@@ -249,7 +255,9 @@ class _EventsScreenState extends State<EventsScreen> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 40),
                       child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF1A237E)),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Color(0xFF1A237E),
+                        ),
                       ),
                     ),
                   );
@@ -276,7 +284,8 @@ class _EventsScreenState extends State<EventsScreen> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: events.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final item = events[index];
                     final color = Color(item.colorValue);
@@ -308,8 +317,8 @@ class _EventsScreenState extends State<EventsScreen> {
                               item.category == 'Sports'
                                   ? Icons.sports_soccer
                                   : item.category == 'Technical'
-                                      ? Icons.terminal
-                                      : Icons.celebration,
+                                  ? Icons.terminal
+                                  : Icons.celebration,
                               color: color,
                               size: 24,
                             ),
@@ -331,7 +340,11 @@ class _EventsScreenState extends State<EventsScreen> {
                                 const SizedBox(height: 4),
                                 Row(
                                   children: [
-                                    Icon(Icons.calendar_today, size: 12, color: Colors.grey.shade500),
+                                    Icon(
+                                      Icons.calendar_today,
+                                      size: 12,
+                                      color: Colors.grey.shade500,
+                                    ),
                                     const SizedBox(width: 4),
                                     Text(
                                       '${item.date} • ${item.time}',
@@ -345,7 +358,11 @@ class _EventsScreenState extends State<EventsScreen> {
                                 const SizedBox(height: 2),
                                 Row(
                                   children: [
-                                    Icon(Icons.location_on_outlined, size: 12, color: Colors.grey.shade500),
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      size: 12,
+                                      color: Colors.grey.shade500,
+                                    ),
                                     const SizedBox(width: 4),
                                     Text(
                                       item.location,
@@ -358,7 +375,10 @@ class _EventsScreenState extends State<EventsScreen> {
                                 ),
                                 const SizedBox(height: 6),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: color.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(6),
@@ -376,19 +396,17 @@ class _EventsScreenState extends State<EventsScreen> {
                             ),
                           ),
 
-                          Container(
-                            width: 60,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: color.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.image_outlined,
-                                color: color,
-                                size: 28,
-                              ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.asset(
+                              item.title.toLowerCase().contains('hackathon') || item.category.toLowerCase().contains('technical')
+                                  ? 'assets/images/event_hackathon.jpg'
+                                  : item.title.toLowerCase().contains('football') || item.category.toLowerCase().contains('sports')
+                                  ? 'assets/images/event_sports.jpg'
+                                  : 'assets/images/event_cultural.jpg',
+                              width: 62,
+                              height: 62,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ],
@@ -397,6 +415,40 @@ class _EventsScreenState extends State<EventsScreen> {
                   },
                 );
               },
+            ),
+
+            const SizedBox(height: 20),
+
+            Center(
+              child: SizedBox(
+                width: 130,
+                height: 38,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      (route) => false,
+                    );
+                  },
+                  icon: const Icon(Icons.logout_rounded, size: 16, color: Color(0xFFEF4444)),
+                  label: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Color(0xFFEF4444),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Color(0xFFFCA5A5)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: EdgeInsets.zero,
+                  ),
+                ),
+              ),
             ),
 
             const SizedBox(height: 24),

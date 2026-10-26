@@ -8,6 +8,7 @@ import 'home_screen.dart';
 import 'timetable_screen.dart';
 import 'events_screen.dart';
 import 'profile_screen.dart';
+import 'login_screen.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({super.key});
@@ -285,6 +286,38 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         }).toList(),
                       ),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: SizedBox(
+                    width: 130,
+                    height: 38,
+                    child: OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => const LoginScreen()),
+                          (route) => false,
+                        );
+                      },
+                      icon: const Icon(Icons.logout_rounded, size: 16, color: Color(0xFFEF4444)),
+                      label: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Color(0xFFEF4444),
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFFFCA5A5)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        padding: EdgeInsets.zero,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),

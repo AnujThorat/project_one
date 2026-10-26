@@ -75,55 +75,25 @@ class _SplashScreenState extends State<SplashScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                    width: 90,
-                    height: 90,
+                    width: 95,
+                    height: 95,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: AppColors.secondary.withOpacity(0.4),
-                        width: 2,
-                      ),
+                      borderRadius: BorderRadius.circular(22),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.secondary.withOpacity(0.25),
-                          blurRadius: 24,
-                          spreadRadius: 4,
+                          color: AppColors.secondary.withOpacity(0.3),
+                          blurRadius: 28,
+                          spreadRadius: 2,
                         ),
                       ],
                     ),
-                    child: Center(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Text(
-                            'C',
-                            style: TextStyle(
-                              fontSize: 52,
-                              fontWeight: FontWeight.w900,
-                              color: AppColors.secondary,
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 4,
-                                  offset: const Offset(1, 2),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 10,
-                            right: 12,
-                            child: Transform.rotate(
-                              angle: -0.15,
-                              child: const Icon(
-                                Icons.school,
-                                size: 26,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(22),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        width: 95,
+                        height: 95,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
